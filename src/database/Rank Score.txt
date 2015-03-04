@@ -1,0 +1,12 @@
+-- https://oj.leetcode.com/problems/rank-scores/
+SELECT s2.Score,
+       s.Rank
+FROM
+  ( SELECT @rownum:=@rownum+1 AS Rank, s.Score
+   FROM
+     (SELECT DISTINCT Score
+      FROM Scores
+      ORDER BY Score desc) s,
+     (SELECT @rownum:=0) r) s
+INNER JOIN Scores s2 ON s2.Score = s.Score
+order by s.Rank

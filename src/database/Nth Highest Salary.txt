@@ -1,0 +1,13 @@
+-- https://oj.leetcode.com/problems/nth-highest-salary/
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  RETURN (
+select s2.Salary from
+        Employee s1 left outer join 
+        (select @rownum:=@rownum+1 as Rank, p.Salary from
+               (select distinct Salary from Employee) p, (SELECT @rownum:=0) r order by Salary desc
+         ) s2 on s2.Rank = N
+        limit 1
+      
+  );
+END
