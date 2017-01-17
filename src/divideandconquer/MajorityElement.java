@@ -48,12 +48,6 @@ public class MajorityElement {
 
           System.out.println((new MajorityElement()).majorityElement(nums));
 
-//        Scanner scanner = new Scanner(System.in);
-//        int s = scanner.nextInt();
-//        int[] arr = new int[s];
-//        for(int i=0;i<s;i++) arr[i] = scanner.nextInt();
-//        System.out.println((new MajorityElement()).majorityElement(arr));
-
     }
 
 }
