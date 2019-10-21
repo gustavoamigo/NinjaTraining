@@ -36,9 +36,11 @@ class AddBinaryBigInt {
     return result.toString();
   }
 
-  public int intAtOrZero(String str, int i) {
-    if(i>=str.length()) return 0;
 
+
+  public int intAtOrZero(String str, int i) {
+
+    if(i>=str.length()) return 0;
     return str.charAt(i) == '1' ? 1 : 0;
   }
 
