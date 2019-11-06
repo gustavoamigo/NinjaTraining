@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+// https://leetcode.com/explore/interview/card/facebook/53/recursion-3/293/
 class PermutaionWithRepetition {
   int[] nums;
   Set<List<Integer>> solution = new HashSet<>();
