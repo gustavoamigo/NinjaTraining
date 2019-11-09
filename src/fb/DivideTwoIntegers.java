@@ -30,5 +30,7 @@ class DivideTwoIntegers {
   public static void main(String[] args) {
     DivideTwoIntegers divideTwoIntegers = new DivideTwoIntegers();
     System.out.println(divideTwoIntegers.divide(20, 6));
+    String a = "1235";
   }
+
 }
