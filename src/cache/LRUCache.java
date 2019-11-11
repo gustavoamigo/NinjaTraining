@@ -2,27 +2,27 @@ package cache;
 
 import java.util.*;
 
-/* 
+/*
  * https://oj.leetcode.com/problems/lru-cache/
  */
 public class LRUCache {
-    
+
     private static class CacheItem {
         int key;
         int value;
         CacheItem prev;
         CacheItem next;
     }
-    
+
     private CacheItem first;
     private CacheItem last;
-    
+
     private int capacity;
     private int size = 0;
     private HashMap<Integer, CacheItem> cache;
 
     public LRUCache(int capacity) {
-        this.cache = new HashMap<Integer, CacheItem> (capacity);
+        this.cache = new HashMap<> (capacity);
         this.capacity = capacity;
     }
 
@@ -32,8 +32,8 @@ public class LRUCache {
         promote(cacheItem);
         return cacheItem.value;
     }
-    
-    public void set(int key, int value) {
+
+    public void put(int key, int value) {
         CacheItem cacheItem = this.cache.get(key);
         if(cacheItem == null) {
             if(size == capacity) dumpLast();
@@ -41,23 +41,23 @@ public class LRUCache {
             newItem.key = key;
             newItem.value = value;
             this.cache.put(key, newItem);
-            AddToFirst(newItem);
+            addToFirst(newItem);
         } else {
             cacheItem.value = value;
             promote(cacheItem);
         }
     }
-    
+
     private void dumpLast() {
         this.cache.remove(this.last.key);
         removeFromList(this.last);
     }
-    
+
     private void promote(CacheItem cacheItem) {
         removeFromList(cacheItem);
-        AddToFirst(cacheItem);
+        addToFirst(cacheItem);
     }
-    
+
     private void removeFromList(CacheItem cacheItem) {
         CacheItem prev = cacheItem.prev;
         CacheItem next = cacheItem.next;
@@ -76,8 +76,8 @@ public class LRUCache {
         }
         size--;
     }
-    
-    private void AddToFirst(CacheItem cacheItem) {
+
+    private void addToFirst(CacheItem cacheItem) {
         CacheItem oldFirst = this.first;
         this.first = cacheItem;
         cacheItem.prev = null;
@@ -86,18 +86,18 @@ public class LRUCache {
             oldFirst.prev = cacheItem;
         } else if(oldFirst == null) {
             cacheItem.next = null;
-            this.last = cacheItem;    
+            this.last = cacheItem;
         }
         size++;
     }
-    
+
     public static void main(String[] args) {
 		LRUCache cache = new LRUCache(2);
-		cache.set(2, 1);
-		cache.set(1, 1);
-		cache.set(2, 3);
-		cache.set(4, 1);
+		cache.put(2, 1);
+		cache.put(1, 1);
+		cache.put(2, 3);
+		cache.put(4, 1);
 		System.out.println(cache.get(1));
-		System.out.println(cache.get(2));		
+		System.out.println(cache.get(2));
 	}
 }
