@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 class MergeAccounts {
-  
+
 
   public List<List<String>> accountsMerge(List<List<String>> accounts) {
     Map<String, String> emailName = new HashMap<>();

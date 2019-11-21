@@ -30,9 +30,9 @@ class QuickSelect {
     while(true) {
       int pivotIndex = start;
       int i = partition(pivotIndex, start, end);
-      int ck = nums.length - i;
-      if(ck == k) return nums[i];
-      if(ck>k) {
+      int candidate = nums.length - i;
+      if(candidate == k) return nums[i];
+      if(candidate>k) {
         start = i + 1;
       } else {
         end = i;

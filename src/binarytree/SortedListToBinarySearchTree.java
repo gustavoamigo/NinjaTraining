@@ -1,6 +1,6 @@
 package binarytree;
 
-/* 
+/*
  * https://oj.leetcode.com/problems/convert-sorted-list-to-binary-search-tree/
  */
 public class SortedListToBinarySearchTree {
@@ -20,7 +20,7 @@ public class SortedListToBinarySearchTree {
 	    TreeNode right;
 	    TreeNode(int x) { val = x; }
 	}
-	
+
 	public void inOrderPrint(TreeNode root) {
 		if(root != null) {
 			System.out.print("[");
@@ -32,7 +32,7 @@ public class SortedListToBinarySearchTree {
 			System.out.print("]");
 		}
 	}
-	
+
     public TreeNode sortedListToBST(ListNode head) {
     	if(head == null) return null;
     	if(head.next == null) return new TreeNode(head.val);
@@ -42,7 +42,6 @@ public class SortedListToBinarySearchTree {
     	ListNode tail = head;
     	int i = 0;
     	while(tail != null) {
-    		
     		if(i!= 0 && i % 2 == 0) {
     			previousCurrent = current;
     			current = current.next;
@@ -50,21 +49,21 @@ public class SortedListToBinarySearchTree {
     		i++;
     		tail = tail.next;
     	}
-    	
-    	
+
+
     	TreeNode root = new TreeNode(current.val);
-    	
+
     	if(previousCurrent!=null) {
     		previousCurrent.next = null;
     		root.left = sortedListToBST(head);
     	}
-    	
+
     	if(current.next != null)
     		root.right = sortedListToBST(current.next);
-    	
+
         return root;
-    }	
-    
+    }
+
 	public static void main(String[] args) {
 		int[] sorted = {1,2,3,4,5};
 		ListNode head = new ListNode(sorted[0]);
@@ -74,11 +73,11 @@ public class SortedListToBinarySearchTree {
 			current.next = next;
 			current = next;
 		}
-		
+
 		SortedListToBinarySearchTree sol = new SortedListToBinarySearchTree();
 		TreeNode root =  sol.sortedListToBST(head);
 		sol.inOrderPrint(root);
-		
+
 
 	}
 

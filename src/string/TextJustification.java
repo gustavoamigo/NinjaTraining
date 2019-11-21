@@ -37,7 +37,7 @@ public class TextJustification {
 		}
 		return builder.toString();
 	}
-	
+
     public ArrayList<String> fullJustify(String[] words, int L) {
     	ArrayList<String> justifiedText = new ArrayList<String>();
     	ArrayList<String> line = new ArrayList<String>();
@@ -45,20 +45,20 @@ public class TextJustification {
     	int minLineLength = 0;
     	while(i<words.length) {
     		if( minLineLength + ((minLineLength==0) ? 0 : 1) + words[i].length() <= L) {
-    			minLineLength += 
+    			minLineLength +=
     					((minLineLength==0) ? 0 : 1) + words[i].length();
     			line.add(words[i]);
     			i++;
     		} else {
     			justifiedText.add(justifyLine(line, L, minLineLength, false));
-    			line = new ArrayList<String>();
+    			line = new ArrayList<>();
     			minLineLength = 0;
     		}
     	}
     	if(line.size() != 0) justifiedText.add(justifyLine(line, L, minLineLength, true));
     	return justifiedText;
     }
-    
+
     public static void main(String[] args) {
 		String[] words = {"The","goblin","shark","is","a","rare,","poorly","understood","species","of","deep-sea","shark.",
 				"Sometimes","called","a","living","fossil","it","is","the","only","extant","last"};
@@ -67,8 +67,8 @@ public class TextJustification {
 		for(String line : text) {
 			System.out.println("\""+ line + "\":" + line.length());
 		}
-		
-		
+
+
 	}
-	
+
 }

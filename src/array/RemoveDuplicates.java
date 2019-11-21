@@ -11,17 +11,17 @@ public class RemoveDuplicates {
     private void removeElement(int[] a, int del) {
         System.arraycopy(a,del+1,a,del,a.length-1-del);
     }
-    
-    public int removeDuplicates(int[] A) {
-        
-        if(A.length<=1) return A.length;
-        
+
+    public int removeDuplicates(int[] nums) {
+
+        if(nums.length<=1) return nums.length;
+
         int i = 1;
-        int length = A.length;
-        
+        int length = nums.length;
+
         while(i<length) {
-            if(A[i] == A[i-1]) {
-                removeElement(A, i);
+            if(nums[i] == nums[i-1]) {
+                removeElement(nums, i);
                 length--;
             } else {
                 i++;
@@ -29,20 +29,20 @@ public class RemoveDuplicates {
         }
         return length;
     }
-    
+
     public static void main(String[] args) {
     	RemoveDuplicates instance = new RemoveDuplicates();
     	int[] a = {1,1};
     	System.out.println(instance.removeDuplicates(a));
     	System.out.println(Arrays.toString(a));
-    	
+
     	int[] b = {1,2,3,3,4};
     	System.out.println(instance.removeDuplicates(b));
     	System.out.println(Arrays.toString(b));
-    	
+
     	int[] c = {1,2,3,3};
-    	System.out.println(instance.removeDuplicates(c));   
+    	System.out.println(instance.removeDuplicates(c));
     	System.out.println(Arrays.toString(c));
-    	
+
 	}
 }
