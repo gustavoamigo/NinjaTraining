@@ -6,9 +6,7 @@ class AddBinaryBigInt {
   public String addBinary(String a, String b) {
     String aR = reverse(a);
     String bR = reverse(b);
-
     StringBuffer result = new StringBuffer();
-
     int maxLength = Math.max(a.length(), b.length());
     int remaining = 0;
     for(int i = 0; i<maxLength; i++) {
@@ -39,7 +37,6 @@ class AddBinaryBigInt {
 
 
   public int intAtOrZero(String str, int i) {
-
     if(i>=str.length()) return 0;
     return str.charAt(i) == '1' ? 1 : 0;
   }
