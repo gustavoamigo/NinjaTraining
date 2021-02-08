@@ -1,16 +1,20 @@
 package dynamicprogramming;
 
+import java.util.Stack;
+
 public class MaxCoins {
 
 	
 	public static Integer coinProblem(int[] values, int sum) {
 		
 		Integer[] min = new Integer[sum+1];
+
 		
 		for(int i=1; i<=sum;i++) {
 			min[i] = null;
 		}
-		
+
+
 		min[0] = 0;
 		
 		for(int i = 1 ; i<= sum; i++) {

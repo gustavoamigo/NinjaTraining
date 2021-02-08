@@ -1,6 +1,8 @@
 package fb;
 
+import java.io.Reader;
 import java.util.Stack;
+import java.util.TreeSet;
 
 public class ValidParenthesis {
 
@@ -28,6 +30,8 @@ public class ValidParenthesis {
     }
 
     public static void main(String[] args) {
+
+        TreeSet<Integer> treeSet = new TreeSet<>();
         ValidParenthesis solution = new ValidParenthesis();
         System.out.println(solution.isValid("()"));
     }

@@ -13,7 +13,7 @@ public class WordBreak {
     
     private Tree head;
     
-    private void buildTree(Set<String> dict) {
+    private void buildTree(List<String> dict) {
         for(String word:dict) {
             buildTree(word);
         }
@@ -29,7 +29,7 @@ public class WordBreak {
         current.isWord = true;
     }
        
-    public boolean wordBreak(String s, Set<String> dict) {
+    public boolean wordBreak(String s, List<String> dict) {
         if(s == null || s.isEmpty()) return false;
         if(dict == null || dict.size() == 0) return false;
         
@@ -70,10 +70,12 @@ public class WordBreak {
     }	
 
 	public static void main(String[] args) {
+
+       new String( "a".toCharArray());
 		
 		WordBreak word = new WordBreak();
 		String s = "leetcode";
-		Set<String> dict = new HashSet<String>();
+		List<String> dict = new ArrayList<String>();
 		dict.add("leet");
 		dict.add("code");
 		
@@ -81,21 +83,21 @@ public class WordBreak {
 		
 		
 		s = "leetacode";
-		dict = new HashSet<String>();
+		dict = new ArrayList<String>();
 		dict.add("leet");
 		dict.add("code");
 		
 		System.out.println(word.wordBreak(s, dict));		
 		
 		s = "busbusabus";
-		dict = new HashSet<String>();
+		dict = new ArrayList<String>();
 		dict.add("bus");
 		dict.add("busa");
 		
 		System.out.println(word.wordBreak(s, dict));
 		
 		s = "bb";
-		dict = new HashSet<String>();
+		dict = new ArrayList<String>();
 		dict.add("b");
 		dict.add("a");
 		dict.add("bbb");
@@ -104,7 +106,7 @@ public class WordBreak {
 		System.out.println(word.wordBreak(s, dict));	
 		
 		s = "bbabbbusbb";
-		dict = new HashSet<String>();
+		dict = new ArrayList<String>();
 		dict.add("b");
 		dict.add("a");
 		dict.add("bb");
@@ -115,7 +117,7 @@ public class WordBreak {
 
 		
 		s = "aaaaaaa";
-		dict = new HashSet<String>();
+		dict = new ArrayList<String>();
 		dict.add("aaaa");
 		dict.add("aa");
 
@@ -123,7 +125,7 @@ public class WordBreak {
 		System.out.println(word.wordBreak(s, dict));
 		
 		s = "aaaaaaa";
-		dict = new HashSet<String>();
+		dict = new ArrayList<String>();
 		dict.add("aaaa");
 		dict.add("aa");
 		dict.add("bb");
