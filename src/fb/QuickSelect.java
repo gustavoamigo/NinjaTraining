@@ -16,11 +16,7 @@ class QuickSelect {
 
   int[] nums;
 
-  private void swap(int i, int j) {
-    int aux = nums[i];
-    nums[i] = nums[j];
-    nums[j] = aux;
-  }
+
 
 
   public int findKthLargest(int[] numsArg, int k) {
@@ -40,10 +36,16 @@ class QuickSelect {
     }
   }
 
+  private void swap(int i, int j) {
+    int aux = nums[i];
+    nums[i] = nums[j];
+    nums[j] = aux;
+  }
 
   public int partition(int pivotIndex, int start, int end) {
     int index = start;
     int pivot = nums[pivotIndex];
+
     // move pivot to the right;
     swap(end, pivotIndex);
 
@@ -54,8 +56,7 @@ class QuickSelect {
         index++;
       }
     }
-
-    // move the pivot back to the
+    // move the pivot back to the index
     swap(end, index);
     return index;
   }

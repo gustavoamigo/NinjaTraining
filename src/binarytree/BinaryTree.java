@@ -277,6 +277,7 @@ class BinaryTree<T> {
 	}
 	
 	public static void main(String[] args) {
+
 		BinaryTree<String> tree 
 			= new BinaryTree<String>(
 			new Node<String>("F", 

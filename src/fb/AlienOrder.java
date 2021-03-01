@@ -1,31 +1,50 @@
 package fb;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 public class AlienOrder {
 
     public String alienOrder(String[] words) {
-        HashMap<Character, Character> pairs = new HashMap<>();
+
         if(words.length == 0) return "";
         if(words.length == 1) return words[0];
-        int x = 0;
-        int y = 0;
-        HashSet<Character> allCharacters = new HashSet<>();
-        for(int i = 0; i < words.length ; i++) {
-            for(int j = 0; j < words[i].length() ; j++) {
-                allCharacters.add(words[i].charAt(j));
+
+        HashMap<Character, Set<Character>> adj = new HashMap<>();
+        int[] indegree = new int[26];
+
+        // Reset the indegree table
+        for(int i = 0 ; i < 26 ; i++) indegree[i] = -1;
+        for(String word: words) {
+            for(char c: word.toCharArray()) {
+                if(indegree[c - 'a'] == -1) indegree[c - 'a'] = 0;
             }
         }
 
+        // Create the adjacency list
+        int x = 0;
+        int y = 0;
         while(y < words.length - 1) {
-            if(x < words[y].length() && x < words[y+1].length()
-                    && words[y].charAt(x) == words[y+1].charAt(x)) {
+            String firstWord = words[y];
+            String secondWord = words[y+1];
+
+            if (firstWord.length() > secondWord.length() && firstWord.startsWith(secondWord)) {
+                return "";
+            }
+            if(x < firstWord.length() && x < secondWord.length()
+                    && firstWord.charAt(x) == secondWord.charAt(x)) {
                 // move left
                 x++;
             } else {
-                if(x < words[y].length() && x < words[y+1].length()) {
-                    pairs.put(words[y].charAt(x), words[y+1].charAt(x));
+                if(x < firstWord.length() && x < secondWord.length()) {
+                    char source = firstWord.charAt(x);
+                    char dest = secondWord.charAt(x);
+
+                    if(!adj.containsKey(source)) adj.put(source, new HashSet<>());
+
+                    if(!adj.get(source).contains(dest)) {
+                        adj.get(source).add(dest);
+                        indegree[dest - 'a']++;
+                    }
                 }
                 // move down
                 x = 0;
@@ -33,33 +52,37 @@ public class AlienOrder {
             }
         }
 
-        Character c = null;
-        for(int i = 0; i < words.length && c == null; i++) {
-            for(int j = 0; j < words[i].length() && c == null; j++) {
-                if(pairs.containsKey( words[i].charAt(j))) {
-                    c = words[i].charAt(j);
+        // Run a topological order using indegree algorithm
+        Queue<Character> queue = new LinkedList<>();
+        StringBuffer result = new StringBuffer();
+
+        for(int i = 0; i<26 ; i++) {
+            if(indegree[i] == 0) {
+                queue.offer((char)(i +  'a'));
+            }
+        }
+
+        while(queue.size() > 0) {
+            char node = queue.poll();
+            result.append(node);
+
+            if(adj.containsKey(node)) {
+                for(char neighbour: adj.get(node)) {
+                    indegree[neighbour - 'a']--;
+                    if(indegree[neighbour - 'a'] == 0) {
+                        queue.add(neighbour);
+                    }
                 }
             }
         }
 
-        StringBuffer result = new StringBuffer();
-        HashSet<Character> visited = new HashSet<>();
-        allCharacters.remove(c);
-        while(c != null) {
-            if(visited.contains(c)) return "";
-            visited.add(c);
-            result.append(c);
-            char p = c;
-            c = pairs.get(c);
-            if(c == null && pairs.size() > 0) {
-                visited.remove(p);
-                c = pairs.keySet().iterator().next();
+        // we need to remove all indegree in order to be valid
+        for(int i = 0; i<26 ; i++) {
+            if(indegree[i] > 0) {
+                return "";
             }
-
-            allCharacters.remove(c);
-            pairs.remove(p);
         }
-        for(char remaining: allCharacters) result.append(remaining);
+
         return result.toString();
     }
 

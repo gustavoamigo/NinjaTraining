@@ -6,6 +6,7 @@ class SearchRotatedSortedArray {
     if(nums.length == 0) return -1;
     int slice = findSlice(nums);
     int start = 0;
+
     int end = nums.length - 1;
     while (true) {
       if(start >= end && nums[translate(slice, nums.length, start)] != target) return -1;

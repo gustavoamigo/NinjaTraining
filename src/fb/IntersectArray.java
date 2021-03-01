@@ -1,6 +1,6 @@
 package fb;
 
-import java.util.HashSet;
+import java.util.*;
 
 class IntersectArray {
   public int[] intersection(int[] nums1, int[] nums2) {
@@ -26,6 +26,7 @@ class IntersectArray {
   }
 
   public static void main(String[] args) {
+    Deque<String> deque = new ArrayDeque<String>();
     IntersectArray intersectArray = new IntersectArray();
     int[] nums1 = {4,9,5};
     int[] nums2 = {9,4,9,8,4};
