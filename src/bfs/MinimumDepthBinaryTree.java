@@ -1,5 +1,9 @@
 package bfs;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+
 /**
  * https://leetcode.com/problems/minimum-depth-of-binary-tree/
  */
@@ -20,7 +24,16 @@ public class MinimumDepthBinaryTree {
     }
 
     private int bfs(TreeNode node, int depth) {
+
+        for(int i =0, j=0;i<2&&j<2;) {
+
+            i++;
+            j++;
+        }
+
         if(isLeaf(node)) return depth;
+        List<List<Integer>> ans = new ArrayList<>();
+
         int leftDepth = Integer.MAX_VALUE;
         if(node.left != null) leftDepth = bfs(node.left, depth + 1);
         int rightDepth = Integer.MAX_VALUE;
